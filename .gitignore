@@ -12,20 +12,23 @@
 /phpunit*.phar
 /phpunit.xml
 
-# Symfony config
-#/app/config/parameters.yml
-
-#Symfony runtime directories
-#/var/*
-#!/var/cache
-#/var/cache/*
-#!var/cache/.gitkeep
-#!/var/logs
-#/var/logs/*
-#!var/logs/.gitkeep
-#!/var/sessions
-#/var/sessions/*
-#!var/sessions/.gitkeep
-#!var/SymfonyRequirements.php
+# Symfony legacy
+/.web-server-pid
+/app/config/parameters.yml
+/build/
+/phpunit.xml
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+/vendor/
+/web/bundles/
 
 #Static files
