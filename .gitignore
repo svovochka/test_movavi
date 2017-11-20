@@ -1,0 +1,31 @@
+# IDE files
+.idea/
+
+# Vagrant files
+/.vagrant
+
+# Composer files
+/composer.lock
+/vendor/
+
+# PHPUnit files
+/phpunit*.phar
+/phpunit.xml
+
+# Symfony config
+#/app/config/parameters.yml
+
+#Symfony runtime directories
+#/var/*
+#!/var/cache
+#/var/cache/*
+#!var/cache/.gitkeep
+#!/var/logs
+#/var/logs/*
+#!var/logs/.gitkeep
+#!/var/sessions
+#/var/sessions/*
+#!var/sessions/.gitkeep
+#!var/SymfonyRequirements.php
+
+#Static files
