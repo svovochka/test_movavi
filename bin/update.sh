@@ -21,10 +21,8 @@ sudo rm -rf var/cache/dev/
 # Install composer dependencies
 composer install
 
-# Create database
-php bin/console doctrine:database:create --env=prod
-
 # Perform database updates
+# php bin/console doctrine:schema:update --force --env=prod
 php bin/console doctrine:migrations:migrate --no-interaction --env=prod --allow-no-migration
 
 # Install assets
