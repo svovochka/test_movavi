@@ -1,21 +1,19 @@
 <?php
 
-namespace AppBundle\Controller\Admin\Categories;
+namespace AppBundle\Controller\Admin\Comments;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 
-class ListController extends Controller
+class ListController extends BaseController
 {
     /**
-     * @Route("/admin/categories", name="admin_categories")
+     * @Route("/admin/comments", name="admin_comments")
      */
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('@Admin/comments/list.html.twig');
     }
 }

@@ -1,23 +1,21 @@
 <?php
 
-namespace AppBundle\Controller\Admin\Categories;
+namespace AppBundle\Controller\Admin\Comments;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 
-class CreateController extends Controller
+class CreateController extends BaseController
 {
     /**
-     * @Route("/admin/categories/create", name="admin_categories_create")
+     * @Route("/admin/comments/create", name="admin_comments_create")
      * @Method({"GET","POST"})
      */
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('@Admin/comments/create.html.twig');
     }
 }

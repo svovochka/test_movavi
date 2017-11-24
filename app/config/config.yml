@@ -37,6 +37,9 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    paths:
+        '%kernel.project_dir%/src/AppBundle/Resources/views/frontend': Frontend
+        '%kernel.project_dir%/src/AppBundle/Resources/views/admin': Admin
 
 # Doctrine Configuration
 doctrine:
