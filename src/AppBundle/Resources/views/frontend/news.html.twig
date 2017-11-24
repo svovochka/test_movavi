@@ -3,5 +3,49 @@
 {% block title %}View news{% endblock %}
 
 {% block content %}
-    <h1>View news</h1>
+
+    <h1>View article</h1>
+
+    <article>
+        <h2>{{ article.title }}</h2>
+        <div><em>{{ article.createdAt|date("Y-m-d H:i") }}</em></div>
+        <div>{{ article.text }}</div>
+    </article>
+
+    <h2>Comments</h2>
+
+    {% if successReport == true %}
+        <div>
+            <strong>Your comment successfully sent! </strong>
+        </div>
+    {% endif %}
+
+    <div>
+        {{ form_start(commentForm) }}
+        {{ form_widget(commentForm) }}
+        {{ form_end(commentForm) }}
+    </div>
+
+    <div>
+        {% for comment in comments %}
+            <article>
+                <div><em>{{ comment.createdAt|date("Y-m-d H:i") }}</em></div>
+                <p>{{ comment.text }}</p>
+            </article>
+        {% endfor %}
+
+        <nav>
+            {% if paginator.getTotalPages() > 1 %}
+                {% for i in 1..paginator.getTotalPages() %}
+                    {% if i == paginator.getCurrentPage() %}
+                        <strong>{{ i }}</strong>
+                    {% else %}
+                        <a href="{{ path('frontend_news', {'slug': article.slug, 'page': i}) }}">{{ i }}</a>
+                    {% endif %}
+                    &nbsp;&nbsp;
+                {% endfor %}
+            {% endif %}
+        </nav>
+    </div>
+
 {% endblock %}

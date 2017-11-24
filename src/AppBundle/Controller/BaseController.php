@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Utils\Paginator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -35,5 +36,18 @@ class BaseController extends Controller
     protected function getRepository($entityClass)
     {
         return $this->getEntityManager()->getRepository($entityClass);
+    }
+
+    /**
+     * Get maximal per page number
+     * @return Paginator
+     */
+    protected function getPaginator($queryBuilder, $perPage, $currentPage)
+    {
+        $paginator = new Paginator($queryBuilder, $perPage, $currentPage);
+        $paginator->setMaxPerPage($perPage);
+        $paginator->setDefaultPerPage($perPage);
+
+        return $paginator;
     }
 }

@@ -3,5 +3,40 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
+
     <h1>Homepage</h1>
+
+    <div>
+        {% if direction == 'DESC' %}
+            <a href="{{ path('frontend_default', {'direction': 'ASC'}) }}">New first</a>
+            &nbsp;&nbsp;
+            <strong>Old first</strong>
+        {% else %}
+            <strong>New first</strong>
+            &nbsp;&nbsp;
+            <a href="{{ path('frontend_default', {'direction': 'DESC'}) }}">Old first</a>
+        {% endif %}
+    </div>
+
+    {% for article in news %}
+        <article>
+            <h2><a href="{{ path('frontend_news', {'slug': article.slug}) }}">{{ article.title }}</a></h2>
+            <div><em>{{ article.createdAt|date("Y-m-d H:i") }}</em></div>
+            <p>{{ article.summary }}</p>
+        </article>
+    {% endfor %}
+
+    <nav>
+        {% if paginator.getTotalPages() > 1 %}
+            {% for i in 1..paginator.getTotalPages() %}
+                {% if i == paginator.getCurrentPage() %}
+                    <strong>{{ i }}</strong>
+                {% else %}
+                    <a href="{{ path('frontend_default', {'page': i, 'direction': direction}) }}">{{ i }}</a>
+                {% endif %}
+                &nbsp;&nbsp;
+            {% endfor %}
+        {% endif %}
+    </nav>
+
 {% endblock %}
