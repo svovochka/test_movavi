@@ -16,19 +16,22 @@ class CategoryController extends BaseController
      */
     public function indexAction($slug, Request $request)
     {
-        $category = $this->getRepository(Category::class)->findOneBy(['slug'=> $slug]);
+        $category = $this->getRepository(Category::class)->findOneBy(['slug' => $slug]);
 
-        if(!$category){
+        if (!$category) {
             throw new NotFoundHttpException();
         }
 
         $direction = $request->query->get('direction') ?? 'DESC';
 
-        $queryBuilder = $this->getRepository(News::class)->createQueryBuilder('e');
-        $queryBuilder->andWhere('e.isActive=1');
-        $queryBuilder->andWhere('e.category=:categoryId');
-        $queryBuilder->setParameter('categoryId', $category->getId());
-        $queryBuilder->addOrderBy('e.createdAt', $direction);
+        $queryBuilder = $this->getRepository(News::class)->createQueryBuilder('e')
+            ->innerJoin('e.category', 'c')
+            ->andWhere('e.isActive=1')
+            ->andWhere('c.lft>=:lft')
+            ->andWhere('c.rgt<=:rgt')
+            ->setParameter('lft', $category->getLft())
+            ->setParameter('rgt', $category->getRgt())
+            ->addOrderBy('e.createdAt', $direction);
 
         //Configure paginator
         $page = $request->query->get('page');

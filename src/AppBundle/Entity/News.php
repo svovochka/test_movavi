@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * News
@@ -55,6 +56,7 @@ class News
      * @Assert\NotBlank()
      * @Assert\Type("string")
      * @Assert\Length(max = 255)
+     * Gedmo\Slug(fields={"title"})
      */
     protected $slug;
 

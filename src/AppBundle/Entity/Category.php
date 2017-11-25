@@ -5,11 +5,13 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Category
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Gedmo\Tree(type="nested")
  */
 class Category
 {
@@ -48,11 +50,13 @@ class Category
      * @Assert\NotBlank()
      * @Assert\Type("string")
      * @Assert\Length(max = 255)
+     * @Gedmo\Slug(fields={"title"})
      */
     protected $slug;
 
     /**
      * @var Category
+     * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="categories")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="categoryId", referencedColumnName="id", nullable=true, onDelete="CASCADE")
@@ -71,6 +75,35 @@ class Category
      * @ORM\OneToMany(targetEntity="News", mappedBy="category")
      */
     protected $news;
+
+    /**
+     * @var integer
+     * @Gedmo\TreeLeft
+     * @ORM\Column(type="integer")
+     */
+    private $lft;
+
+    /**
+     * @var integer
+     * @Gedmo\TreeLevel
+     * @ORM\Column(type="integer")
+     */
+    private $lvl;
+
+    /**
+     * @var integer
+     * @Gedmo\TreeRight
+     * @ORM\Column(type="integer")
+     */
+    private $rgt;
+
+    /**
+     * @var Category
+     * @Gedmo\TreeRoot
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $root;
 
     /**
      * @return int
@@ -245,6 +278,70 @@ class Category
         $this->news->removeElement($news);
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLft(): int
+    {
+        return $this->lft;
+    }
+
+    /**
+     * @param int $lft
+     */
+    public function setLft(int $lft)
+    {
+        $this->lft = $lft;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLvl(): int
+    {
+        return $this->lvl;
+    }
+
+    /**
+     * @param int $lvl
+     */
+    public function setLvl(int $lvl)
+    {
+        $this->lvl = $lvl;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRgt(): int
+    {
+        return $this->rgt;
+    }
+
+    /**
+     * @param int $rgt
+     */
+    public function setRgt(int $rgt)
+    {
+        $this->rgt = $rgt;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * @param Category $root
+     */
+    public function setRoot(Category $root)
+    {
+        $this->root = $root;
     }
 
 }

@@ -3,6 +3,24 @@
 {% block title %}Frontend{% endblock %}
 
 {% block layout %}
+    <nav>
+        {% set items = get_frontend_menu() %}
+            {% set lastLvl = 0 %}
+            {% for item in items %}
+                {% if item.lvl > lastLvl %}
+                    <ul>
+                {% elseif item.lvl == lastLvl %}
+                    </li>
+                {% elseif item.lvl < lastLvl %}
+                    {% set notFirstChild = false %}
+                    {% for i in item.lvl..lastLvl-1 %}
+                        </li></ul>
+                    {% endfor %}
+                {% endif %}
+                <li><a href="{{ path('frontend_category', {'slug': item.slug}) }}">{{ item.title }}</a>
+                {% set lastLvl = item.lvl %}
+            {% endfor %}
+    </nav>
     <div>
         {% block content %}{% endblock %}
     </div>
