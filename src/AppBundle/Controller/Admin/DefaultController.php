@@ -13,7 +13,6 @@ class DefaultController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
         return $this->render('@Admin/default.html.twig');
     }
 }

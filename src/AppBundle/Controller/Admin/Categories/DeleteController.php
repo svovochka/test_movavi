@@ -2,10 +2,12 @@
 
 namespace AppBundle\Controller\Admin\Categories;
 
+use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DeleteController extends BaseController
 {
@@ -15,7 +17,15 @@ class DeleteController extends BaseController
      */
     public function indexAction($id, Request $request)
     {
-        // replace this example code with whatever you need
+        $category = $this->getRepository(Category::class)->find($id);
+
+        if (!$category || $category->getLvl() == 0) {
+            throw new NotFoundHttpException();
+        }
+
+        $this->getEntityManager()->remove($category);
+        $this->getEntityManager()->flush();
+
         return $this->redirectToRoute('admin_categories');
     }
 }

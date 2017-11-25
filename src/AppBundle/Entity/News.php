@@ -53,10 +53,7 @@ class News
     /**
      * @var string
      * @ORM\Column(name="slug", type="string", length=255, nullable=false)
-     * @Assert\NotBlank()
-     * @Assert\Type("string")
-     * @Assert\Length(max = 255)
-     * Gedmo\Slug(fields={"title"})
+     * @Gedmo\Slug(fields={"title"})
      */
     protected $slug;
 

@@ -58,7 +58,6 @@ class NewsController extends BaseController
         //Find collection
         $comments = $paginator->paginate();
 
-        // replace this example code with whatever you need
         return $this->render('@Frontend/news.html.twig', [
             'article' => $article,
             'comments' => $comments,

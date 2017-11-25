@@ -3,6 +3,14 @@
 {% block title %}Administration panel{% endblock %}
 
 {% block layout %}
+    <nav>
+        <ul>
+            <li><a href="{{ path('admin_categories') }}">Categories</a></li>
+            <li><a href="{{ path('admin_news') }}">News</a></li>
+            <li><a href="{{ path('admin_comments') }}">Comments</a></li>
+            <li><a href="{{ path('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
     <div>
         {% block content %}{% endblock %}
     </div>

@@ -3,5 +3,19 @@
 {% block title %}Update category{% endblock %}
 
 {% block content %}
+
     <h1>Update category</h1>
+
+    <p><a href="{{ path('admin_categories') }}">Back</a></p>
+
+    <form method="post" action="{{ path('admin_categories_delete', {'id': category.id}) }}">
+        <button type="submit">Delete category</button>
+    </form>
+
+    <div>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+
 {% endblock %}

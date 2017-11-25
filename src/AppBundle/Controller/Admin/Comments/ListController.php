@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Admin\Comments;
 
+use AppBundle\Entity\Comment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +14,20 @@ class ListController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('@Admin/comments/list.html.twig');
+        $queryBuilder = $this->getRepository(Comment::class)->createQueryBuilder('e');
+        $queryBuilder->addOrderBy('e.createdAt', 'DESC');
+
+        //Configure paginator
+        $page = $request->query->get('page');
+        $perPage = 20;
+        $paginator = $this->getPaginator($queryBuilder, $perPage, $page);
+
+        //Find collection
+        $comments = $paginator->paginate();
+
+        return $this->render('@Admin/comments/list.html.twig', [
+            'comments' => $comments,
+            'paginator' => $paginator
+        ]);
     }
 }

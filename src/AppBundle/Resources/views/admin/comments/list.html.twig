@@ -3,5 +3,43 @@
 {% block title %}Comments list{% endblock %}
 
 {% block content %}
+    
     <h1>Comments list</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Created at</th>
+            <th>Article</th>
+            <th>Category</th>
+            <th>Text</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <th>{{ comment.createdAt|date("Y-m-d H:i") }}</th>
+                <th>{{ comment.news.title }}</th>
+                <th>{{ comment.news.category.title }}</th>
+                <th>{{ comment.text }}</th>
+                <th><a href="{{ path('admin_comments_update', {'id': comment.id}) }}">Edit</a></th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <nav>
+        {% if paginator.getTotalPages() > 1 %}
+            {% for i in 1..paginator.getTotalPages() %}
+                {% if i == paginator.getCurrentPage() %}
+                    <strong>{{ i }}</strong>
+                {% else %}
+                    <a href="{{ path('admin_comments', {'page': i}) }}">{{ i }}</a>
+                {% endif %}
+                &nbsp;&nbsp;
+            {% endfor %}
+        {% endif %}
+    </nav>
+    
 {% endblock %}

@@ -41,7 +41,6 @@ class CategoryController extends BaseController
         //Find collection
         $categoryNews = $paginator->paginate();
 
-        // replace this example code with whatever you need
         return $this->render('@Frontend/category.html.twig', [
             'category' => $category,
             'news' => $categoryNews,

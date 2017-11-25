@@ -2,10 +2,12 @@
 
 namespace AppBundle\Controller\Admin\Comments;
 
+use AppBundle\Entity\Comment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DeleteController extends BaseController
 {
@@ -15,7 +17,15 @@ class DeleteController extends BaseController
      */
     public function indexAction($id, Request $request)
     {
-        // replace this example code with whatever you need
+        $comment = $this->getRepository(Comment::class)->find($id);
+
+        if (!$comment) {
+            throw new NotFoundHttpException();
+        }
+
+        $this->getEntityManager()->remove($comment);
+        $this->getEntityManager()->flush();
+
         return $this->redirectToRoute('admin_comments');
     }
 }
