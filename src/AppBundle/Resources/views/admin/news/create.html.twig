@@ -5,12 +5,17 @@
 {% block content %}
     <h1>Create article</h1>
 
-    <p><a href="{{ path('admin_news') }}">Back</a></p>
-
     <div>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+        <a class="btn btn-default" href="{{ path('admin_news') }}"><i class="glyphicon glyphicon-chevron-left"></i>
+            Backto list</a>
     </div>
+
+    <section class="vertical-indent">
+        <div>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </section>
 
 {% endblock %}

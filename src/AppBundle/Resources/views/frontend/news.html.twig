@@ -4,10 +4,8 @@
 
 {% block content %}
 
-    <h1>View article</h1>
-
     <article>
-        <h2>{{ article.title }}</h2>
+        <h1>{{ article.title }}</h1>
         <div><em>{{ article.createdAt|date("Y-m-d H:i") }}</em></div>
         <div>{{ article.text }}</div>
     </article>

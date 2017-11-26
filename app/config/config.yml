@@ -40,6 +40,8 @@ twig:
     paths:
         '%kernel.project_dir%/src/AppBundle/Resources/views/frontend': Frontend
         '%kernel.project_dir%/src/AppBundle/Resources/views/admin': Admin
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:

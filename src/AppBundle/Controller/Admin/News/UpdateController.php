@@ -38,7 +38,10 @@ class UpdateController extends BaseController
             ->add('title', TextType::class, ['label' => 'Title'])
             ->add('summary', TextareaType::class, ['label' => 'Summary'])
             ->add('text', TextareaType::class, ['label' => 'Text'])
-            ->add('isActive', CheckboxType::class, ['label' => 'Publish'])
+            ->add('isActive', CheckboxType::class, [
+                'label' => 'Publish',
+                'required'=>false
+            ])
             ->add('category', EntityType::class, [
                     'class' => Category::class,
                     'choice_label' => 'title',

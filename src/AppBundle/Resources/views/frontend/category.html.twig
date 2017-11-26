@@ -4,20 +4,13 @@
 
 {% block content %}
 
-    <h1>View category</h1>
+    <h1>{{ category.title }}</h1>
 
-    <h2>{{ category.title }}</h2>
-
-    <div>
-        {% if direction == 'DESC' %}
-            <a href="{{ path('frontend_category', {'slug': category.slug, 'direction': 'ASC'}) }}">New first</a>
-            &nbsp;&nbsp;
-            <strong>Old first</strong>
-        {% else %}
-            <strong>New first</strong>
-            &nbsp;&nbsp;
-            <a href="{{ path('frontend_category', {'slug': category.slug, 'direction': 'DESC'}) }}">Old first</a>
-        {% endif %}
+    <div class="btn-group" role="group" aria-label="...">
+        <a class="btn btn-default {% if direction == 'DESC' %}active{% endif %}"
+           href="{{ path('frontend_category', {'slug': category.slug, 'direction': 'ASC'}) }}">New first</a>
+        <a class="btn btn-default {% if direction == 'ASC' %}active{% endif %}"
+           href="{{ path('frontend_category', {'slug': category.slug, 'direction': 'DESC'}) }}">Old first</a>
     </div>
 
     {% for article in news %}

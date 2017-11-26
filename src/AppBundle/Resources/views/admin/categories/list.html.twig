@@ -3,12 +3,16 @@
 {% block title %}Categories list{% endblock %}
 
 {% block content %}
+
     <h1>Categories list</h1>
 
-    <p><a href="{{ path('admin_categories_create') }}">Create new category</a></p>
-
     <div>
+        <a class="btn btn-success" href="{{ path('admin_categories_create') }}"><i class="glyphicon glyphicon-plus"></i>
+            Add category</a>
+    </div>
 
+    <section class="vertical-indent">
+        <div class="unmarked">
         {% set lastLvl = 0 %}
         {% for category in categories %}
         {% if category.lvl > lastLvl %}
@@ -21,8 +25,10 @@
                 </li></ul>
             {% endfor %}
         {% endif %}
-        <li><a href="{{ path('admin_categories_update', {'id': category.id}) }}">{{ category.title }}</a>
+        <li>- <a href="{{ path('admin_categories_update', {'id': category.id}) }}">{{ category.title }}</a>
             {% set lastLvl = category.lvl %}
             {% endfor %}
-    </div>
+        </div>
+    </section>
+
 {% endblock %}

@@ -55,7 +55,7 @@ class UpdateController extends BaseController
 
         // replace this example code with whatever you need
         return $this->render('@Admin/categories/update.html.twig', [
-            'article' => $model,
+            'category' => $model,
             'form' => $form->createView()
         ]);
     }

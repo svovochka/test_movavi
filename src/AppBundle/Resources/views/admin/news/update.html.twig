@@ -6,16 +6,20 @@
 
     <h1>Update article</h1>
 
-    <form method="post" action="{{ path('admin_news_delete', {'id': article.id}) }}">
-        <button type="submit">Delete article</button>
-    </form>
-
-    <p><a href="{{ path('admin_news') }}">Back</a></p>
-
     <div>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+        <a class="btn btn-default" href="{{ path('admin_news') }}"><i class="glyphicon glyphicon-chevron-left"></i> Backto list</a>
     </div>
 
+    <section class="vertical-indent">
+        <div>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+
+        <form method="post" action="{{ path('admin_news_delete', {'id': article.id}) }}">
+            <button calss="btn btn-danger" type="submit">Delete article</button>
+        </form>
+
+    </section>
 {% endblock %}

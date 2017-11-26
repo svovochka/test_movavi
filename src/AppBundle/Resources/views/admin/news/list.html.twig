@@ -6,40 +6,49 @@
 
     <h1>Articles list</h1>
 
-    <p><a href="{{ path('admin_news_create') }}">Create new article</a></p>
+    <div>
+        <a class="btn btn-success" href="{{ path('admin_news_create') }}"><i class="glyphicon glyphicon-plus"></i> Add
+            article</a>
+    </div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Is active</th>
-            <th>Created at</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
+    <section class="vertical-indent">
+
+        <table class="table">
+            <thead>
             <tr>
-                <th><a href="{{ path('admin_news_update', {'id': article.id}) }}">{{ article.title }}</a></th>
-                <th>{{ article.category.title }}</th>
-                <th>{% if article.isActive==true %} Published {% else %} Hidden {% endif %}</th>
-                <th>{{ article.createdAt|date("Y-m-d H:i") }}</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Is active</th>
+                <th>Created at</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <nav>
-        {% if paginator.getTotalPages() > 1 %}
-            {% for i in 1..paginator.getTotalPages() %}
-                {% if i == paginator.getCurrentPage() %}
-                    <strong>{{ i }}</strong>
-                {% else %}
-                    <a href="{{ path('admin_news', {'page': i}) }}">{{ i }}</a>
-                {% endif %}
-                &nbsp;&nbsp;
+            </thead>
+            <tbody>
+            {% for article in articles %}
+                <tr>
+                    <th><a href="{{ path('admin_news_update', {'id': article.id}) }}">{{ article.title }}</a></th>
+                    <th>{{ article.category.title }}</th>
+                    <th>{% if article.isActive==true %}<i
+                                class="glyphicon glyphicon-ok-circle text-success"></i>{% else %}<i
+                                class="text-danger glyphicon glyphicon-ban-circle"></i>{% endif %}</th>
+                    <th>{{ article.createdAt|date("Y-m-d H:i") }}</th>
+                </tr>
             {% endfor %}
-        {% endif %}
-    </nav>
+            </tbody>
+        </table>
+
+        <nav>
+            {% if paginator.getTotalPages() > 1 %}
+                {% for i in 1..paginator.getTotalPages() %}
+                    {% if i == paginator.getCurrentPage() %}
+                        <strong>{{ i }}</strong>
+                    {% else %}
+                        <a href="{{ path('admin_news', {'page': i}) }}">{{ i }}</a>
+                    {% endif %}
+                    &nbsp;&nbsp;
+                {% endfor %}
+            {% endif %}
+        </nav>
+
+    </section>
 
 {% endblock %}

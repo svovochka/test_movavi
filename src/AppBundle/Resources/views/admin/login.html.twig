@@ -4,21 +4,28 @@
 
 {% block content %}
 
-    <h1>Authorization</h1>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h1>Authorization</h1>
 
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+            {% if error %}
+                <p class="text text-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+            {% endif %}
 
-    <form action="{{ path('admin_login') }}" method="post">
+            <form action="{{ path('admin_login') }}" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Username:</label>
+                    <input type="text" name="_username" class="form-control" id="exampleInputEmail1" placeholder="Username"
+                           value="{{ last_username }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password:</label>
+                    <input type="password" name="_password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default">Login</button>
+            </form>
 
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
-
-        <button type="submit">login</button>
-    </form>
+        </div>
+    </div>
 
 {% endblock %}

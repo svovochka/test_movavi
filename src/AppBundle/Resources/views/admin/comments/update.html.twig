@@ -6,16 +6,22 @@
 
     <h1>Update comment</h1>
 
-    <form method="post" action="{{ path('admin_comments_delete', {'id': comment.id}) }}">
-        <button type="submit">Delete comment</button>
-    </form>
-
-    <p><a href="{{ path('admin_comments') }}">Back</a></p>
-
     <div>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+        <a class="btn btn-default" href="{{ path('admin_comments') }}">
+            <i class="glyphicon glyphicon-chevron-left"></i> Back to list</a>
     </div>
+
+    <section class="vertical-indent">
+        <div>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+
+        <form method="post" action="{{ path('admin_comments_delete', {'id': comment.id}) }}">
+            <button class="btn btn-danger" type="submit">Delete comment</button>
+        </form>
+
+    </section>
 
 {% endblock %}

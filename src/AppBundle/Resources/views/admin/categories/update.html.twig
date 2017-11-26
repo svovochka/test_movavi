@@ -6,16 +6,22 @@
 
     <h1>Update category</h1>
 
-    <p><a href="{{ path('admin_categories') }}">Back</a></p>
-
-    <form method="post" action="{{ path('admin_categories_delete', {'id': category.id}) }}">
-        <button type="submit">Delete category</button>
-    </form>
-
     <div>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
+        <a class="btn btn-default" href="{{ path('admin_categories') }}"><i class="glyphicon glyphicon-chevron-left"></i> Back to list</a>
     </div>
+
+    <section class="vertical-indent">
+
+        <div>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+
+        <form method="post" action="{{ path('admin_categories_delete', {'id': category.id}) }}">
+            <button class="btn btn-danger" type="submit">Delete category</button>
+        </form>
+
+    </section>
 
 {% endblock %}

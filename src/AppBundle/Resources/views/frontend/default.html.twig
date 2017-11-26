@@ -4,18 +4,13 @@
 
 {% block content %}
 
-    <h1>Homepage</h1>
+    <h1>Recent news</h1>
 
     <div>
-        {% if direction == 'DESC' %}
-            <a href="{{ path('frontend_default', {'direction': 'ASC'}) }}">New first</a>
-            &nbsp;&nbsp;
-            <strong>Old first</strong>
-        {% else %}
-            <strong>New first</strong>
-            &nbsp;&nbsp;
-            <a href="{{ path('frontend_default', {'direction': 'DESC'}) }}">Old first</a>
-        {% endif %}
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-default {% if direction == 'DESC' %}active{% endif %}" href="{{ path('frontend_default', {'direction': 'ASC'}) }}">New first</a>
+            <a class="btn btn-default {% if direction == 'ASC' %}active{% endif %}" href="{{ path('frontend_default', {'direction': 'DESC'}) }}">Old first</a>
+        </div>
     </div>
 
     {% for article in news %}
