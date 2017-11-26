@@ -71,11 +71,31 @@ class FrontendMenuExtension extends \Twig_Extension
 
     public function getFrontendMenu()
     {
-        $queryBuilder = $this->getRepository(Category::class)->createQueryBuilder('e')
-            //->innerJoin('e.news', 'n')
-            //->andWhere('n.isActive=1')
+        //Find not empty categories
+        $notEmptyCategories = $this->getRepository(Category::class)->createQueryBuilder('e')
+            ->innerJoin('e.news', 'n')
+            ->andWhere('n.isActive=1')
             ->andWhere('e.lvl!=0')
+            ->groupBy('e.id')
+            ->getQuery()
+            ->getResult();
+
+        $queryBuilder = $this->getRepository(Category::class)->createQueryBuilder('e')
             ->addOrderBy('e.lft', 'ASC');
+
+        $index = 0;
+        foreach ($notEmptyCategories as $category) {
+            if($index==0) {
+                $queryBuilder->where('e.lft<=:lft' . $index . ' AND e.rgt>=:rgt' . $index);
+            } else {
+                $queryBuilder->orWhere('e.lft<=:lft' . $index . ' AND e.rgt>=:rgt' . $index);
+            }
+            $queryBuilder->setParameter('lft' . $index, $category->getLft());
+            $queryBuilder->setParameter('rgt' . $index, $category->getRgt());
+            $index++;
+        }
+
+        $queryBuilder->andWhere('e.lvl!=0');
 
         $menuItems = $queryBuilder->getQuery()->getResult();
 
