@@ -22,13 +22,13 @@ sudo rm -rf var/cache/dev/
 composer install
 
 # Create database
-php bin/console doctrine:database:create --env=prod
+php bin/console doctrine:database:create --env=dev
 
 # Perform database updates
-php bin/console doctrine:migrations:migrate --no-interaction --env=prod --allow-no-migration
+php bin/console doctrine:migrations:migrate --no-interaction --env=dev --allow-no-migration
 
 # Install assets
-php bin/console assets:install --env=prod
+php bin/console assets:install --env=dev
 #php bin/console assetic:dump --env=prod
 
 # Clean cache and logs
